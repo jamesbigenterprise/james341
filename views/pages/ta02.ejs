@@ -1,0 +1,43 @@
+<!--
+  Modify the ta02.ejs page to 
+  display a form with method POST and action "/ta02/addUser". 
+  Also create a section of the ejs file that will loop through an array of at least 3 
+  names sent over via the render method.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>    
+  </div>
+</div>
+<div class="container">
+  <form action="/ta02/addUser" method="POST"> 
+    <label for="addField">New Username</label>
+    <input type="text" name="addField">
+    <p class="message"> <%= msgs[0] %> </p>
+    <button type="submit"> Add User</button>
+  </form>
+
+  <ul>
+    <% if(userNames.length > 0){ %>
+      <% userNames.forEach(user => { %>
+        <li> Username: <%= user %> </li>
+      <% }); %> 
+    <% } %>
+  </ul>  
+
+  <form action="/ta02/removeUser" method="POST"> 
+    <label for="removeField">New Username</label>
+    <input type="text" name="removeField">
+    <p class="message"> <%= msgs[1] %> </p>
+
+    <button type="submit"> Remove User</button>
+      

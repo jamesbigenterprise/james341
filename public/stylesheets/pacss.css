@@ -1,0 +1,11 @@
+body{background-color: #1b1b2f;}
+main{background-color: #1f4068; padding: 10%; margin: 10%; width:60%;}
+div{background-color: #1b1b2f; color: #1f4068; }
+h2{margin: 0%; padding: 3%;}
+button{
+    border: #1b1b2f solid 2px; 
+    background-color: #1f4068; 
+    color:#162447;
+    font-size: 1em;
+    margin: 5% 0;
+}

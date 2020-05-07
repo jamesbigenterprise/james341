@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>    
+  </div>
+</div>
+<body>
+    <main>
+        <h1>Book input</h1>
+
+        <form action="/pa02/book" method="POST">
+            <label for="title">Book Tile:</label>
+            <input type="text" name="title">
+            <br>
+            <label for="summary"> Summary:</label>
+            <textarea name="summary"> </textarea>
+            <br>
+            <button type="submit"> Submit </button>
+        </form>
+</main>
+</body>
+</html>

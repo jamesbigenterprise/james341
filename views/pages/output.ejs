@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>    
+  </div>
+</div>
+    
+    <main>
+        <div class="left">
+            <h2> Title: <%= book[0].title %> </h2>
+        </div>
+        <div class="right">
+            <h2> Summary: <%= book[0].summary %> </h2>
+        </div>
+    </main>
+
+
+</body>
+</html>
