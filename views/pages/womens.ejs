@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/basicsAppMain.css" />
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+  </div>
+  
+</div>
+<div class="container list">
+  <ul>
+    <%products.forEach(prod => { %>
+      <li>
+        <a href="/basicsApp/products/<%= prod.id%>">
+          <img src="<%= prod.imageUrl %>" alt="<%= prod.name %>">
+          <h3><%= prod.name %></h3>
+          <h3>$ <%= prod.price %> </h3>
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+</div>
+</body>
+</html>

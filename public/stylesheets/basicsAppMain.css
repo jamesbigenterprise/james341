@@ -1,0 +1,23 @@
+img{
+    width: 90%;
+    height: inherit;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .list li{
+    width: 20%;
+    flex-direction: row;
+    border: solid 1px #0065BD;
+    border-radius: 1%;
+    margin: 2%;
+  }
+  .search{
+    width: fit-content;
+    margin: auto;
+  }

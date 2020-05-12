@@ -2,7 +2,6 @@
 <html>
 <head>
   <% include ../includes/header.ejs %>
-
   <style>
     img{
       width: 90%;
@@ -35,29 +34,21 @@
 <div class="jumbotron text-center">
   <div class="container">
     <h1><%= title %></h1>
-    <p>This is the placeholder for Team Activity 03</p>
   </div>
+  
 </div>
-<div class="search">
-  <form action="ta03/search" method="POST">
-      <input type="text" name="search">
-      <button type="submit"> &#128269; </button>
-    </form>
-</div>
-
 <div class="container list">
   <ul>
     <%products.forEach(prod => { %>
       <li>
-        <img src="<%= prod.imageUrl %>" alt="<%= prod.name %>">
-        <h3><%= prod.name %></h3>
-        <h3>$ <%= prod.price %> </h3>
-        <P> <%= prod.description %></P> 
+        <a href="/basicsApp/products/<%= prod.id%>">
+          <img src="<%= prod.imageUrl %>" alt="<%= prod.name %>">
+          <h3><%= prod.name %></h3>
+          <h3>$ <%= prod.price %> </h3>
+        </a>
       </li>
     <% }); %>
   </ul>
 </div>
-
-
 </body>
 </html>

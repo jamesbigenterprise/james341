@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/basicsAppMain.css" />
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+
+  </div>
+</div>
+<div class="container list">
+    <ul>
+      <%homeData.forEach(item => { %>
+        <li>
+          <a href="/basicsApp/<%= item.name %>">
+              <img src="<%= item.imgURL%>" alt="<%= item.name %>">
+              <h3><%= item.name %></h3>
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+</body>
+</html>
