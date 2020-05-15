@@ -15,33 +15,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localhost:5000
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
-
-
+const cors = require('cors');
+const corsOptions = require('./util/database').corsOptions;
+const mongoConnect = require('./util/database').mongoConnect;
+  
 const app = express();
-
-//cors configuration
-
-const cors = require('cors') // Place this with other requires (like 'path' and 'express')
-const corsOptions = {
-    origin: "https://cse341james.herokuapp.com/",
-    optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
-
-const options = {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false, 
-    family: 4
-};
-
-const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://mongo341:mongo341@cluster0-j1hjj.mongodb.net/test?retryWrites=true&w=majority";
-                        
-
-
 
 // Route setup. You can implement more in the future!
 const ta01Routes = require('./routes/ta01');
@@ -74,18 +52,13 @@ app.use(express.static(path.join(__dirname, 'public')))
      // 404 page
      res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
    });
-   //.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+//cors configuration
+app.use(cors(corsOptions));
+mongoConnect(client => {
+  console.log(client);
+  
+  app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+});
 
 
-   MongoClient
-   .connect(
-     MONGODB_URL, options
-   )
-   .then(result => {
-     console.log('connected');
-     
-     app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
-   })
-   .catch(err => {
-     console.log(err);
-   });
+   
