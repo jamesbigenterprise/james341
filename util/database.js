@@ -44,5 +44,6 @@ const mongoConnect = callback => {
      throw "no database found";
  }
 module.exports.options = options;   
+module.exports.corsOptions = corsOptions;
 module.exports.mongoConnect = mongoConnect;
 module.exports.getDb = getDb;
