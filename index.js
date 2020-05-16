@@ -18,7 +18,8 @@ const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localho
 const cors = require('cors');
 const corsOptions = require('./util/database').corsOptions;
 const mongoConnect = require('./util/database').mongoConnect;
-  
+const getDb = require('./util/database').getDb;
+
 const app = express();
 
 // Route setup. You can implement more in the future!
@@ -54,9 +55,8 @@ app.use(express.static(path.join(__dirname, 'public')))
    });
 //cors configuration
 app.use(cors(corsOptions));
-mongoConnect(client => {
-  console.log(client);
-  
+mongoConnect(()=> {
+  const db = getDb();
   app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 });
 

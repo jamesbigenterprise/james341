@@ -1,5 +1,6 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://mongo341:mongo341@cluster0-j1hjj.mongodb.net/test?retryWrites=true&w=majority";
 //cors configuration
 
 
@@ -16,6 +17,7 @@ const options = {
     family: 4
 };
 
+let _db;
 const mongoConnect = callback => {
     MongoClient
    .connect(
@@ -23,16 +25,24 @@ const mongoConnect = callback => {
    )
    .then(client => {
      console.log('connected');
-     callback(client);
+     _db = client.db();
+     callback();
      //app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
    })
    .catch(err => {
      console.log(err);
+     throw err;
    });
 
 }
 
-   const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://mongo341:mongo341@cluster0-j1hjj.mongodb.net/test?retryWrites=true&w=majority";
- 
+   
+ const getDb = () => {
+     if(_db) {
+         return _db;
+     }
+     throw "no database found";
+ }
 module.exports.options = options;   
 module.exports.mongoConnect = mongoConnect;
+module.exports.getDb = getDb;
