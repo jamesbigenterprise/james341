@@ -31,6 +31,7 @@
 </style>
 <body>
   <% include ../includes/nav.ejs %>
+  <% include ../includes/navBasics.ejs %>
 <div class="jumbotron text-center">
   <div class="container">
     <h1><%= title %></h1>
@@ -39,10 +40,13 @@
 </div>
 <ul>
     <li>
-      <img src="<%= product.imageUrl %>" alt="<%= product.name %>">
+      <img src="<%= product.imgUrl %>" alt="<%= product.name %>">
       <h3><%= product.name %></h3>
       <h3>$ <%= product.price %> </h3>
       <P> <%= product.description %></P> 
+      <a href="/basicsApp/admin/editProduct/<%= product._id%>">Edit</a>
+      <a href="/basicsApp/admin/deleteProduct/<%= product._id%>">Delete</a>
+      <a href="/basicsApp/cart/add/<%= product._id%>">Add To Cart</a>
     </li>
 </ul>
 </body>

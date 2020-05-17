@@ -1,6 +1,8 @@
 const mongodb = require('mongodb');
+const mongoose = require('mongoose');
+
 const MongoClient = mongodb.MongoClient;
-const MONGODB_URL = process.env.MONGODB_URL || 'mongodb+srv://mongo341:mongo341@cluster0-j1hjj.mongodb.net/test?retryWrites=true&w=majority';
+
 //cors configuration
 
 

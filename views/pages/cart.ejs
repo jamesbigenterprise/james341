@@ -31,24 +31,33 @@
 
 <body>
   <% include ../includes/nav.ejs %>
+  <% include ../includes/navBasics.ejs %>
 <div class="jumbotron text-center">
   <div class="container">
     <h1><%= title %></h1>
   </div>
   
+  
+
+
 </div>
 <div class="container list">
   <ul>
-    <%products.forEach(prod => { %>
+    <%chartItems.forEach(item => { %>
       <li>
-        <a href="/basicsApp/products/<%= prod.id%>">
-          <img src="<%= prod.imageUrl %>" alt="<%= prod.name %>">
-          <h3><%= prod.name %></h3>
-          <h3>$ <%= prod.price %> </h3>
-        </a>
+       <form action="/basicsApp/cart/quantity" method="POST">
+         <h2><%= item.name %></h2>
+         <h2>$ <%= item.price %></h2>
+         <h2><%= item.name %></h2>
+         <input type="number" name="quantity" value="<%= item.quantity %>">
+         <input type="hidden" name="productID" value="<%= item.itemID %>" >
+         <button type="submit">Change Quantity</button>
+         <a href="/basicsApp/cart/remove/<%= item.itemID %>">Remove</a>
+       </form>
       </li>
     <% }); %>
   </ul>
+  <h2>Total $ <%= total %> </h2>
 </div>
 </body>
 </html>

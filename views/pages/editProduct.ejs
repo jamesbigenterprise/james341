@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/basicsAppMain.css" />
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+  <% include ../includes/navBasics.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+
+  </div>
+</div>
+<div class="container list">
+  <form action="/basicsApp/admin/editProduct" method="POST">
+    <label for="name">Item Name:</label>
+    <input type="text" name="name" value="<%= product.name %>">
+    <br>
+    <label for="price">Price:</label>
+    <input type="text" name="price" value="<%= product.price %>">
+    <br>
+    <label for="description">Description:</label>
+    <input type="text" name="description" value="<%= product.description %>">
+    <br>
+    <label for="imgUrl">Image URL:</label>
+    <input type="text" name="imgUrl" value="<%= product.imgUrl %>">
+    <br>
+
+    <% if (product.gender === "m") { %>
+      <label for="m">Male: </label>
+      <input type="radio" name="gender" value="m"checked> 
+      <br>
+      <label for="f">Female: </label>
+      <input type="radio" name="gender" value="f">
+      <br>
+      <%} else { %>
+        <label for="m">Male: </label>
+        <input type="radio" name="gender" value="m"> 
+        <br>
+        <label for="f">Female: </label>
+        <input type="radio" name="gender" value="f" checked>
+        <br>
+      <% } %>
+
+      <input type="hidden" name="_id" value="<%= product._id %>" >
+    <button type="submit">Save</button>
+
+  </form>
+</div>    
+
+
+
+    </ul>
+  </div>
+</body>
+</html>
