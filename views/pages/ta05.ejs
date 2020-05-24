@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+  <link rel="stylesheet" type="text/css" href="<%= style %>" />
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+    <p>This is the placeholder for Team Activity 05</p>
+  </div>
+</div>
+<div class="container">
+
+  <form action="/ta05/change-style" method="POST">
+    <button type="submit"> Change Style </button> 
+  </form>
+<br>
+  <form action="/ta05/counter" method="POST">
+    <input type="hidden" name="mode" value="1">
+    <button type="submit"> Increment </button> 
+  </form>
+  <form action="/ta05/counter" method="POST">
+    <input type="hidden" name="mode" value="0">
+    <button type="submit"> Decrement  </button> 
+  </form>
+
+  <form action="/ta05/reset" method="POST">
+    <button type="submit"> Reset </button> 
+  </form>
+</div>
+
+
+</body>
+</html>

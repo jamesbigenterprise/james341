@@ -21,7 +21,8 @@ router.get('/', (req, res, next) => {
         res.render('pages/gender', {  
             path: '/home', // For pug, EJS    
             title:'Women\'s Clothing',
-            products: female
+            products: female,
+            isLoggedIn: req.session.isLoggedIn
         });
 });
     

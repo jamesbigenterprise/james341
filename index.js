@@ -19,16 +19,27 @@ const cors = require('cors');
 const corsOptions = require('./util/database').corsOptions;
 const options = require('./util/database').options;
 const mongoose = require('mongoose');
-const getDb = require('./util/database').getDb;
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb+srv://mongo341:mongo341@cluster0-j1hjj.mongodb.net/shop?retryWrites=true&w=majority';
+const MONGODB_URI = 'mongodb+srv://mongo341:mongo341@cluster0-j1hjj.mongodb.net/shop';
+const session = require('express-session');
+const mongodbStore = require('connect-mongodb-session')(session);
+
+
 const app = express();
 
+const store = new mongodbStore({
+  uri:MONGODB_URI,
+  collection: 'sessions'
+});  
+
+const User = require(path.join(path.dirname(process.mainModule.filename), 'basicsApp','model','user.js'));
+
 // Route setup. You can implement more in the future!
-const ta01Routes = require('./routes/ta01');
-const ta02Routes = require('./routes/ta02');
-const ta03Routes = require('./routes/ta03'); 
-const ta04Routes = require('./routes/ta04');
-const pa02Routes = require('./routes/pa02'); 
+const ta01Routes = require('./controllers/routes/ta01');
+const ta02Routes = require('./controllers/routes/ta02');
+const ta03Routes = require('./controllers/routes/ta03'); 
+const ta05Routes = require('./controllers/routes/ta05');
+const pa02Routes = require('./controllers/routes/pa02'); 
 const pa03Routes = require('./basicsApp/basicsApp');
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -40,12 +51,32 @@ app.use(express.static(path.join(__dirname, 'public')))
    //.engine('hbs', expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'})) // For handlebars
    //.set('view engine', 'hbs')
    .use(bodyParser({extended: false})) // For parsing the body of a POST
+   .use(session({secret:"team secret", resave:false, saveUninitialized:false, store:store}))
+   .use((req, res, next) => {
+    if (!req.session.user) {
+      return next();
+    }
+    User.findById(req.session.user._id)
+      .then(user => {        
+        req.user = user;
+        next();
+      })
+      .catch(e => console.log(e));
+  })
    .use('/ta01', ta01Routes)
    .use('/ta02', ta02Routes) 
    .use('/ta03', ta03Routes) 
-   .use('/ta04', ta04Routes)
+   .use('/ta05', ta05Routes)
    .use('/pa02', pa02Routes)
    .use('/basicsApp', pa03Routes)
+   
+   
+   
+   
+
+
+
+
    .get('/', (req, res, next) => {
      // This is the primary index, always handled last. 
      res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});

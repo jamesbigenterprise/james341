@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 router.get('/addProduct', (req, res, next) => {
         res.render('pages/addProduct', {  
             path: '/home', // For pug, EJS    
-            title:'Add a Product'
+            title:'Add a Product',
+            isLoggedIn: req.session.isLoggedIn
         });
 });
 
@@ -32,7 +33,8 @@ router.post('/addProduct', (req, res, next) => {
     .then(result => {
             res.render('pages/addProduct', {  
                 path: '/home', // For pug, EJS    
-                title:'Add a Product'
+                title:'Add a Product',
+                isLoggedIn: req.session.isLoggedIn
             });
     }
     ).catch(e => {
@@ -49,7 +51,8 @@ router.get('/editProduct/:productId', (req, res, next) => {
         res.render('pages/editProduct', {  
             path: '/home', // For pug, EJS    
             title: 'Edit Product',
-            product: product
+            product: product,
+            isLoggedIn: req.session.isLoggedIn
         });           
     });    
 });
@@ -77,7 +80,8 @@ router.post('/editProduct', (req, res, next) => {
                 res.render('pages/productDetails', {  
                     path: '/home', // For pug, EJS    
                     title:'Add a Product',
-                    product: result
+                    product: result,
+                    isLoggedIn: req.session.isLoggedIn
                 });
         }
         ).catch(e => {

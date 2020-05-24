@@ -13,7 +13,8 @@ router.get('/edit/:productId', (req, res, next) => {
         res.render('pages/editProductDetails', {  
             path: '/home', // For pug, EJS    
             title: product.name,
-            product: product
+            product: product,
+            isLoggedIn: req.session.isLoggedIn
         });           
     });
 });
@@ -24,7 +25,8 @@ router.use('/:productId', (req, res, next) => {
         res.render('pages/productDetails', {  
             path: '/home', // For pug, EJS    
             title: product.name,
-            product: product
+            product: product,
+            isLoggedIn: req.session.isLoggedIn
         });           
     });     
         
