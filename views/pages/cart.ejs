@@ -48,7 +48,6 @@
        <form action="/basicsApp/cart/add" method="POST">
          <h2><%= item.name %></h2>
          <h2>$ <%= item.price %></h2>
-         <h2><%= item.name %></h2>
          <input type="number" name="quantity" value="<%= item.quantity %>">
          <input type="hidden" name="productID" value="<%= item.itemID %>" >
          <button type="submit">Change Quantity</button>

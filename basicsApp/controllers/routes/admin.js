@@ -4,6 +4,13 @@ const path = require('path');
 const Product = require(path.join(path.dirname(process.mainModule.filename), 'basicsApp','model','product.js'));
 const mongoose = require('mongoose');
 
+router.use((req, res, next) => {
+    if(!req.session.isLoggedIn){
+        res.redirect('/basicsApp/login');
+    }else{
+        next();
+    }
+});
 router.get('/addProduct', (req, res, next) => {
         res.render('pages/addProduct', {  
             path: '/home', // For pug, EJS    

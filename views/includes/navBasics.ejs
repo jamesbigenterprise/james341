@@ -18,15 +18,21 @@
         <li class="<%= path === '/basicsApp/admin/addProduct' ? 'active' : ''%>">
           <a href="/basicsApp/cart"><span class="glyphicon "></span> Cart</a>
         </li>
-              
-        <% } %>
+        <li class="<%= path === '/basicsApp/signout' ? 'active' : ''%>">
+          <a href="/basicsApp/signout"><span class="glyphicon "></span> SignOut</a>
+        </li>       
+        <% }else { %>
         
         <li class="<%= path === '/basicsApp/login' ? 'active' : ''%>">
           <a href="/basicsApp/login"><span class="glyphicon "></span> Login</a>
         </li>
         <li class="<%= path === '/basicsApp/signup' ? 'active' : ''%>">
-          <a href="/basicsApp/signup"><span class="glyphicon "></span> Signup</a>
+          <a href="/basicsApp/signup"><span class="glyphicon "></span> SignUp</a>
         </li> 
+        <% } %>
+        
+
+        
  
 
     </ul>

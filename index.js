@@ -57,8 +57,10 @@ app.use(express.static(path.join(__dirname, 'public')))
       return next();
     }
     User.findById(req.session.user._id)
+    .populate('cart.items.productID')
       .then(user => {        
         req.user = user;
+        
         next();
       })
       .catch(e => console.log(e));

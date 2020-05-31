@@ -18,8 +18,12 @@ router.use('/mens', mensRoutes)
    .use('/cart', cartRoutes) 
    .use(authRoutes)
    .get('/', (req, res, next) => { 
-     res.render('pages/basicsHome', {title: 'Home - Basics Clothing', path: '/', homeData: homeData,
-     isLoggedIn: req.session.isLoggedIn});
+     res.render('pages/basicsHome', {
+       title: 'Home - Basics Clothing', 
+       path: '/',
+       homeData: homeData,
+       isLoggedIn: req.session.isLoggedIn
+      });
     });
 
    module.exports = router; 

@@ -27,23 +27,38 @@ const userSchema = new Schema({
     }   
 });
 
-userSchema.methods.addToCart = function (product, newQuantity = 1) {
+userSchema.methods.addToCart = function (productID, newQuantity = 1) {
     //check if the product already is in the cart
     const itemIndex = this.cart.items.findIndex(cartProduct => {
-        return cartProduct._id.toString() === product._id.toString();
+        
+        
+        return cartProduct.productID._id.toString() === productID.toString();
     });
 
-    const newCartItems = [...this.cart.items];
+    let newCartItems = [...this.cart.items];
     const newQuantityretrieved = newQuantity;
-    console.log(newQuantityretrieved);
+    console.log('USER - itemIndex',itemIndex);
     
     
     //the product is already in the cart, increase quantity
     if(itemIndex >= 0){
 
+        if (newQuantity == 1) {
+            this.cart.items[itemIndex].quantity++;
+            newCartItems = this.cart.items;
+        }else{
+            this.cart.items[itemIndex].quantity = newQuantity;
+            newCartItems = this.cart.items;
+        }
+        
+        //TODO
+        console.log('TODO: INCREASE QUANTITY');
+        
     }else{ //-1 meaning the product is not in the cart yet
+        console.log('USER ADDTOCART - the product is not in the cart yet');
+        
         newCartItems.push({
-            productID:product._id,
+            productID:productID,
             quantity:newQuantity
         });
     }
@@ -55,13 +70,20 @@ userSchema.methods.addToCart = function (product, newQuantity = 1) {
 };
 
 userSchema.methods.removeFromCart = function (productID){
-    
-    const updatedCartItems = req.user.cart.items.filter(item =>{
-        return productID.toString() === item.productID.toString();
-    });
+
+
+    let updatedCartItems = [];
+
+    //if it is not the last item remove using array.filter otherwise we are removing the last item and the items array will be empty
+
+        updatedCartItems = this.cart.items.filter(item =>{ 
+            console.log(!(productID.toString() === item.productID._id.toString()),'productID.toString() ======== ', productID.toString(),'item.productID.toString() ====', item.productID.toString());
+            
+            return !(productID.toString() === item.productID._id.toString());
+        });        
 
     const updatedCart = {
-        items:newCartItems
+        items:updatedCartItems
     };
 
     this.cart = updatedCart;
